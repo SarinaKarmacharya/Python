@@ -19,15 +19,15 @@ for count , element in enumerate(segment):
     msd_array_adhd = []
     
     
-    caselist_adhd = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist_age_adhd.csv",'r+')
+    caselist_adhd = open("caselist_age_adhd.csv",'r+')
     
     
     for line in caselist_adhd:
         casenumber = line.rstrip()
         
         
-        image_data_msd, image_header_msd = load('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/MSD/{0}_MSD.nii' .format(casenumber))
-        image_data_fs, image_header_fs = load("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/freesurferINdwi/{0}_wmparc-in-bse.nii.gz" .format(casenumber))
+        image_data_msd, image_header_msd = load('{0}_MSD.nii' .format(casenumber))
+        image_data_fs, image_header_fs = load("{0}_wmparc-in-bse.nii.gz" .format(casenumber))
         
         vector_msd = np.reshape(image_data_msd, [np.prod(np.array(image_data_msd.shape))])
         vector_fs = np.reshape(image_data_fs, [np.prod(np.array(image_data_fs.shape))])
@@ -59,7 +59,7 @@ for count , element in enumerate(segment):
     
     attnprob_T = []
     
-    list_adhd = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/attnprob_T.csv",'r+')
+    list_adhd = open("attnprob_T.csv",'r+')
     
     for line in list_adhd:
         measure =  line.rstrip()
@@ -88,7 +88,7 @@ for count , element in enumerate(segment):
     t, s = (pearsonr(attnprob_T, msd_array_adhd))
     
     
-    sns.regplot(x="ADHD", y="MSD", robust = True, data = d, ci = None, scatter_kws = {'color':'red'}, line_kws = {'color':'blue'})
+    sns.regplot(x="", y="MSD", robust = True, data = d, ci = None, scatter_kws = {'color':'red'}, line_kws = {'color':'blue'})
         
     
     sns.plt.ylabel("Mean Squared Displacement", size = 16)
@@ -99,7 +99,7 @@ for count , element in enumerate(segment):
     plt.legend(handles = [blue_line], prop = {'size': 12})
     
         
-    plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/correlation_graphs/correlation_attnprob_T_msd_{0}.png' .format(roi), bbox_inches = 'tight')
+    plt.savefig('correlation_attnprob_T_msd_{0}.png' .format(roi), bbox_inches = 'tight')
         
         
     sns.plt.show()
