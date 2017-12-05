@@ -3,7 +3,7 @@
 """
 Created on Wed Jul 19 11:53:57 2017
 
-@author: vs796
+@author: sarina karmacharya
 """
 
 import numpy as np
@@ -24,14 +24,14 @@ fw_array1 = []
 fw_all = []
 subject = []
 
-case = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/case_list_temp.csv",'r+')
+case = open("case_list_temp.csv",'r+')
 
 for line in case:
     casenumber = line.rstrip()
 
 
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/projects/ADHD/FW1000/Fwnii/{0}_FW.nii.gz' .format(casenumber))
-    image_data_fs, image_header_fs = load("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/freesurferINdwi/{0}_wmparc-in-bse.nii.gz" .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii.gz' .format(casenumber))
+    image_data_fs, image_header_fs = load("{0}_wmparc-in-bse.nii.gz" .format(casenumber))
     
 
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
@@ -58,7 +58,7 @@ for line in case:
     fw_all.append(average_gray_all)
     if casenumber.startswith('case1'):
         fw_array.append(average_gray_fw)
-        sub = ('ADHD')
+        sub = ('A')
         subject.append(sub)
     else:
         fw_array1.append(average_gray_fw)
@@ -97,7 +97,7 @@ sns.plt.title('Subcortical: FW', size=20)
 plt.xlabel("Group", size = 16)
 plt.ylabel("FW Values", size = 16)
 plt.show()
-#    plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/final_graphs/{0}_fw.pdf' .format(roi), bbox_inches = 'tight')
+
 
 
 
