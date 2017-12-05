@@ -14,13 +14,13 @@ import numpy as np
 import seaborn as sns
 import pandas as pd
 
-fw_array_adhd = []
+fw_array = []
 
 
-caselist_adhd = open("caselist.csv",'r+')
+caselist = open("caselist.csv",'r+')
 
 
-for line in caselist_adhd:
+for line in caselist:
     casenumber = line.rstrip()
     
     
@@ -34,21 +34,21 @@ for line in caselist_adhd:
     last_vector_fw = vector_fw[keep1]
     
     average_fw = np.mean(last_vector_fw)
-    fw_array_adhd.append(average_fw)
+    fw_array.append(average_fw)
 
 
-caselist_adhd.close()
+caselist.close()
 
-age_array_adhd = []
+age_array = []
 
-agelist_adhd = open("age.csv",'r+')
+agelist = open("age.csv",'r+')
 
-for line in agelist_adhd:
+for line in agelist:
     age =  line.rstrip()
     
-    age_array_adhd.append(float(age))
+    age_array.append(float(age))
     
-agelist_adhd.close()
+agelist.close()
 
 #############
 
@@ -92,7 +92,7 @@ agelist.close()
 data={'FW': fw_array,'AGE': age_array }
 d = pd.DataFrame(data)
 
-data1={'FW ': fw_array_adhd, 'AGE ': age_array_adhd}
+data1={'FW ': fw_array, 'AGE ': age_array}
 d1 = pd.DataFrame(data1)
 
 
@@ -105,7 +105,7 @@ sns.plt.title('FW and Age Correlation', size = 21)
     
 z, x = (pearsonr(age_array, fw_array))
 
-t, s = (pearsonr(age_array_adhd, fw_array_adhd))
+t, s = (pearsonr(age_array, fw_array))
 
 
 sns.regplot(x="AGE", y="FW", robust=True, data=d, ci = None, scatter_kws = {'color':'red'}, line_kws = {'color':'red'})
@@ -121,7 +121,7 @@ green_line = mpatches.Patch(color = 'red')
     
 blue_line = mpatches.Patch(color = 'blue')
 
-plt.legend([green_line, blue_line], ['Control = {0}' .format(z), 'ADHD = {0}' .format(t)], prop = {'size': 12})
+plt.legend([green_line, blue_line], ['Control = {0}' .format(z), 'A= {0}' .format(t)], prop = {'size': 12})
 
     
 
