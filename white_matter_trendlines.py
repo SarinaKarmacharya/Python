@@ -3,7 +3,7 @@
 """
 Created on Thu Jul 13 15:44:37 2017
 
-@author: vs796
+@author: sarina karmacharya
 """
 
 from scipy.stats.stats import pearsonr
@@ -12,16 +12,16 @@ from medpy.io import load
 import numpy as np
 
 
-caselist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist.txt",'r+')
+caselist = open("caselist.txt",'r+')
 
 
 for line in caselist:
     casenumber = line.rstrip()
 
 
-    image_data_msd, image_header_msd = load('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/MSD/{0}_MSD.nii' .format(casenumber))
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/FW/{0}_FW.nii' .format(casenumber))
-    image_data_fs, image_header_fs = load("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/freesurferINdwi/{0}_wmparc-in-bse.nii.gz" .format(casenumber))
+    image_data_msd, image_header_msd = load('{0}_MSD.nii' .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii' .format(casenumber))
+    image_data_fs, image_header_fs = load("{0}_wmparc-in-bse.nii.gz" .format(casenumber))
     
 
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
@@ -82,7 +82,7 @@ plt.ylabel("White Matter Mean Square Displacement")
 plt.xlabel("White Matter Free Water")
 
     
-plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/White_Matter/correlation_graphs/correlation_trendlines.png' .format(casenumber), bbox_inches = 'tight')
+plt.savefig('correlation_trendlines.png' .format(casenumber), bbox_inches = 'tight')
     
 
 plt.show()
