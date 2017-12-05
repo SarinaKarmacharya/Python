@@ -3,7 +3,7 @@
 """
 Created on Fri Jul 21 09:18:05 2017
 
-@author: vs796
+@author: sarina karmacharya
 """
 
 from scipy.stats.stats import pearsonr
@@ -17,14 +17,14 @@ import pandas as pd
 fw_array_adhd = []
 
 
-caselist_adhd = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist_ADHD.csv",'r+')
+caselist_adhd = open("caselist.csv",'r+')
 
 
 for line in caselist_adhd:
     casenumber = line.rstrip()
     
     
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/FW/{0}_FW.nii' .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii' .format(casenumber))
     
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
     
@@ -41,7 +41,7 @@ caselist_adhd.close()
 
 age_array_adhd = []
 
-agelist_adhd = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/age_adhd.csv",'r+')
+agelist_adhd = open("age.csv",'r+')
 
 for line in agelist_adhd:
     age =  line.rstrip()
@@ -55,14 +55,14 @@ agelist_adhd.close()
 fw_array = []
 
 
-caselist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist_control.csv",'r+')
+caselist = open("caselist_control.csv",'r+')
 
 
 for line in caselist:
     casenumber = line.rstrip()
     
     
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/FW/{0}_FW.nii' .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii' .format(casenumber))
     
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
     
@@ -79,7 +79,7 @@ caselist.close()
 
 age_array = []
 
-agelist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/age_control.csv",'r+')
+agelist = open("age_control.csv",'r+')
 
 for line in agelist:
     age =  line.rstrip()
@@ -92,7 +92,7 @@ agelist.close()
 data={'FW': fw_array,'AGE': age_array }
 d = pd.DataFrame(data)
 
-data1={'FW ADHD': fw_array_adhd, 'AGE ADHD': age_array_adhd}
+data1={'FW ': fw_array_adhd, 'AGE ': age_array_adhd}
 d1 = pd.DataFrame(data1)
 
 
@@ -110,7 +110,7 @@ t, s = (pearsonr(age_array_adhd, fw_array_adhd))
 
 sns.regplot(x="AGE", y="FW", robust=True, data=d, ci = None, scatter_kws = {'color':'red'}, line_kws = {'color':'red'})
 
-sns.regplot(x="AGE ADHD", y="FW ADHD", robust=True, data=d1, ci = None, scatter_kws = {'color':'blue'}, line_kws = {'color':'blue'})
+sns.regplot(x="AGE ", y="FW ", robust=True, data=d1, ci = None, scatter_kws = {'color':'blue'}, line_kws = {'color':'blue'})
     
 
 sns.plt.ylabel("Free Water", size = 16)
@@ -124,7 +124,7 @@ blue_line = mpatches.Patch(color = 'blue')
 plt.legend([green_line, blue_line], ['Control = {0}' .format(z), 'ADHD = {0}' .format(t)], prop = {'size': 12})
 
     
-#plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/final_graphs/correlation_age_fw.png', bbox_inches = 'tight')
+
     
     
 sns.plt.show()
