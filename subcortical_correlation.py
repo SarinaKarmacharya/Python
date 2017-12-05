@@ -1,6 +1,6 @@
 import csv
 correlation = []
-with open('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/FW_MSD_correlation.csv', 'rb') as csvfile:
+with open('FW_MSD_correlation.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     header = 0
     i = 0
@@ -13,7 +13,7 @@ with open('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/FW_MSD_correlation.csv', '
 
 """
 
-edit /rfanfs/pnl-zorro/projects/ADHD/Heterogenity-Final/RunHeterogeneity.m
+
 Frontal = 1028,1027,1032,1020,1019,1018,1014,1003,1012,1024,1017,1002,1026,2028,2027,2032,2020,2019,2018,2014,2003,2012,2024,2017,2002,2026
 Parietal = 1008,1029,1031,1025,1022,1023,1010,2008,2029,2031,2025,2022,2023,2010
 Occipital = 1011,1013,1005,1021,2011,2013,2005,2021
@@ -35,16 +35,16 @@ import seaborn as sns
 correlation_constant = []
 
 
-caselist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/case_list_temp.csv",'r+')
+caselist = open("case_list_temp.csv",'r+')
 
 
 for line in caselist:
     casenumber = line.rstrip()
 
 
-    image_data_msd, image_header_msd = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/MSD/{0}_MSD.nii' .format(casenumber))
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/projects/ADHD/FW1000/Fwnii/{0}_FW.nii.gz' .format(casenumber))
-    image_data_fs, image_header_fs = load("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/freesurferINdwi/{0}_wmparc-in-bse.nii.gz" .format(casenumber))
+    image_data_msd, image_header_msd = load('{0}_MSD.nii' .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii.gz' .format(casenumber))
+    image_data_fs, image_header_fs = load("{0}_wmparc-in-bse.nii.gz" .format(casenumber))
     
 
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
@@ -108,7 +108,7 @@ for line in caselist:
 
     plt.title(casenumber, size = 20)
     
-    plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/new_graphs/Subcortical/subcortical_msdfw_correlation_{0}.png' .format(casenumber), bbox_inches = 'tight')
+    plt.savefig('subcortical_msdfw_correlation_{0}.png' .format(casenumber), bbox_inches = 'tight')
     
     
     plt.show()
@@ -136,7 +136,7 @@ for r in correlation:
 
 
 
-with open('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/new_graphs/subcortical_correlation.csv', 'w') as f:
+with open('subcortical_correlation.csv', 'w') as f:
     writer = csv.writer(f)
     writer.writerow(header)
     for row in final_csv:
