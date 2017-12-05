@@ -3,7 +3,7 @@
 """
 Created on Fri Jul 21 09:18:05 2017
 
-@author: vs796
+@author: sarina karmacharya
 """
 
 from scipy.stats.stats import pearsonr
@@ -19,14 +19,14 @@ msd_array_adhd = []
 msd_array = []
 
 
-caselist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist.txt",'r+')
+caselist = open("/caselist.txt",'r+')
 
 
 for line in caselist:
     casenumber = line.rstrip()
     
     
-    image_data_msd, image_header_msd = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/MSD/{0}_MSD.nii' .format(casenumber))
+    image_data_msd, image_header_msd = load('{0}_MSD.nii' .format(casenumber))
     
     vector_msd = np.reshape(image_data_msd, [np.prod(np.array(image_data_msd.shape))])
     
@@ -50,7 +50,7 @@ caselist.close()
 
 age_array_adhd = []
 
-agelist_adhd = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/age_adhd.csv",'r+')
+agelist_adhd = open("age_adhd.csv",'r+')
 
 for line in agelist_adhd:
     age =  line.rstrip()
@@ -65,7 +65,7 @@ agelist_adhd.close()
 
 age_array = []
 
-agelist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/age_control.csv",'r+')
+agelist = open("age_control.csv",'r+')
 
 for line in agelist:
     age =  line.rstrip()
@@ -78,7 +78,7 @@ agelist.close()
 data={'MSD': msd_array,'AGE': age_array }
 d = pd.DataFrame(data)
 
-data1={'MSD ADHD': msd_array_adhd, 'AGE ADHD': age_array_adhd}
+data1={'MSD': msd_array_adhd, 'AGE ': age_array_adhd}
 d1 = pd.DataFrame(data1)
 
 
@@ -96,7 +96,7 @@ t, s = (pearsonr(age_array_adhd, msd_array_adhd))
 
 sns.regplot(x="AGE", y="MSD", robust=True, data=d, ci = None, scatter_kws = {'color':'red'}, line_kws = {'color':'red'})
 
-sns.regplot(x="AGE ADHD", y="MSD ADHD", robust=True, data=d1, ci = None, scatter_kws = {'color':'blue'}, line_kws = {'color':'blue'})
+sns.regplot(x="AGE", y="MSD", robust=True, data=d1, ci = None, scatter_kws = {'color':'blue'}, line_kws = {'color':'blue'})
     
 
 sns.plt.ylabel("Mean Squared Displacement", size = 16)
@@ -107,11 +107,11 @@ green_line = mpatches.Patch(color = 'red')
     
 blue_line = mpatches.Patch(color = 'blue')
 
-plt.legend([green_line, blue_line], ['Control = {0}' .format(z), 'ADHD = {0}' .format(t)], prop = {'size': 12})
+plt.legend([green_line, blue_line], ['Control = {0}' .format(z), 'A = {0}' .format(t)], prop = {'size': 12})
 
 
 
-plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/new_graphs/correlation_age_msd.png', bbox_inches = 'tight')
+plt.savefig('correlation_age_msd.png', bbox_inches = 'tight')
     
     
 sns.plt.show()
