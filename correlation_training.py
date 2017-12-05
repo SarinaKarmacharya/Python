@@ -1,6 +1,6 @@
 import csv
 correlation = []
-with open('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/FW_MSD_correlation.csv', 'rb') as csvfile:
+with open('FW_MSD_correlation.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     header = 0
     i = 0
@@ -31,9 +31,9 @@ for line in caselist:
     casenumber = line.rstrip()
     
     
-    image_data_msd, image_header_msd = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/MSD/{0}_MSD.nii' .format(casenumber))
-    image_data_fw, image_header_fw = load('/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/FW/{0}_FW.nii' .format(casenumber))
-    image_data_fs, image_header_fs = load("/rfanfs/pnl-zorro/projects/ADHD/MultiGaussian_NoV2016/GMM_07292017/wmparc/{0}_wmparc.nii" .format(casenumber))
+    image_data_msd, image_header_msd = load('{0}_MSD.nii' .format(casenumber))
+    image_data_fw, image_header_fw = load('{0}_FW.nii' .format(casenumber))
+    image_data_fs, image_header_fs = load("{0}_wmparc.nii" .format(casenumber))
     
     
     vector_fw = np.reshape(image_data_fw, [np.prod(np.array(image_data_fw.shape))])
@@ -77,7 +77,7 @@ for line in caselist:
 
     plt.title(casenumber, size = 20)
     
-#    plt.savefig('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/final_graphs/msdfw_correlation_{0}.png' .format(casenumber), bbox_inches = 'tight')
+
     
     
     plt.show()
