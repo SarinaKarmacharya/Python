@@ -24,7 +24,7 @@ import pandas as pd
 correlation_constant = []
 
 
-caselist = open("/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/caselist.txt",'r+')
+caselist = open("caselist.txt",'r+')
 
 
 for line in caselist:
@@ -103,7 +103,7 @@ for r in correlation:
 
 
 
-with open('/rfanfs/pnl-zorro/home/vidushi/ADHD_MSD_FW/final_graphs/MSD_FW_correlation.csv', 'w') as f:
+with open('MSD_FW_correlation.csv', 'w') as f:
     writer = csv.writer(f)
     writer.writerow(header)
     for row in final_csv:
