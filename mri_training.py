@@ -2,7 +2,7 @@
 """
 Created on Mon Jun 19 11:03:13 2017
 
-@author: sk834
+@author: sarina karmacharya
 """
 
 #Import modules
